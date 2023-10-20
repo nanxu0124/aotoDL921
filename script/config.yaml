@@ -1,0 +1,4 @@
+user:
+  userName: yumengyang
+  cudaVersion: 11.2.0
+  torchVersion: 12.0
