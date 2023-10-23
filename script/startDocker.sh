@@ -27,4 +27,7 @@ else
 fi
 
 # 启动docker容器
-docker run -it -d -P --name $userName --gpus 'device=0' -v $folder_path:/data 921image:latest
+docker run -it -d -P --name $userName --gpus 'device=0' -v $folder_path:/data 921image:1.0
+
+docker cp /data/myconfig/trans-docker.pub $userName:/root/.ssh/authorized_keys
+

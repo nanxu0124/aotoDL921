@@ -45,14 +45,13 @@ RUN wget -q -O Miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-lates
 ENV PATH /root/miniconda/bin:$PATH
 RUN /bin/bash -c "source miniconda/bin/activate" && conda init
 
-# # Install python and torch
-# RUN conda create -y -n workspace python=3.8
-# RUN echo "source activate workspace" >> ~/.bashrc
-# ENV PATH /root/miniconda/envs/workspace/bin:$PATH
-# RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple \
-# 	&& pip install --upgrade pip \
-# 	&& pip install jupyter
-# RUN pip install torch==1.9.0+cu111 torchvision==0.10.0+cu111 torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html
+# Install python and torch
+RUN conda create -y -n workspace python=3.8
+RUN echo "source activate workspace" >> ~/.bashrc
+ENV PATH /root/miniconda/envs/workspace/bin:$PATH
+RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple \
+	&& pip install --upgrade pip
+RUN pip3 install torch torchvision torchaudio
 
 
 ENTRYPOINT bash
