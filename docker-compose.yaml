@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  mysql8.0:
+    # 镜像名
+    image: mysql:8.0
+    # 容器名(以后的控制都通过这个)
+    container_name: autoDL921
+    # 重启策略
+    restart: always
+    environment:
+      # 时区上海
+      TZ: Asia/Shanghai
+      # root 密码
+      MYSQL_ROOT_PASSWORD: 123456
+    ports:
+      - 13306:3306
+    volumes:
+      #      设置初始化脚本
+      - ./script/mysql/:/docker-entrypoint-initdb.d/
+    command:
+      # 将mysql8.0默认密码策略 修改为 原先 策略 (mysql8.0对其默认策略做了更改 会导致密码无法匹配)
+      --default-authentication-plugin=mysql_native_password
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+      --explicit_defaults_for_timestamp=true
+      --lower_case_table_names=1
